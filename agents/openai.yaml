@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Coding Workspace Creator"
+  short_description: "创建支持 OpenSpec SDD 的多仓领域工作空间"
+  default_prompt: "Use $aicoding-workspace-creator to create a multi-repository AI coding workspace for my business domain."
