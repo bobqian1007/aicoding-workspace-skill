@@ -43,7 +43,7 @@ The generated workspace must contain:
 - `repositories/` with an inventory index and, when requested and authorized, the domain service checkouts or worktrees.
 - `runtime/` for disposable generated artifacts.
 - `openspec/` after SDD initialization, containing the OpenSpec configuration, specifications, and change history.
-- A root `AGENTS.md` containing the domain description, repository inventory, workspace map, and knowledge lookup rules.
+- A root `AGENTS.md` containing the domain description, workspace map, repository lookup rules, and knowledge lookup rules. It must link to `repositories/index.md` instead of copying the repository inventory.
 
 Keep `AGENTS.md` canonical. If `CLAUDE.md` is needed, make it a thin compatibility file that imports or directs the agent to `AGENTS.md`; do not duplicate the rules.
 
@@ -72,7 +72,7 @@ Inventorying a repository does not authorize network cloning or git worktree cre
 - For a worktree, confirm the source checkout, target path under `repositories/`, and branch or commit before running `git worktree add`.
 - For a clone, confirm the repository URL and target directory before running `git clone`.
 - Do not replace a non-empty target directory or change the source repository's current branch.
-- After materialization, update `repositories/index.md` and `AGENTS.md` so paths and status match reality.
+- After materialization, update `repositories/index.md` so paths and status match reality. Update `AGENTS.md` only when workspace-wide repository policy or topology changes; never copy the inventory table into it.
 
 Primary child-repository checkouts are analysis sources and worktree origins. Keep them on their agreed default branches unless the user explicitly requests otherwise. Do not implement a system change directly in a primary checkout.
 
@@ -107,7 +107,7 @@ Verify that:
 4. Repository statuses match the filesystem; a listed worktree passes `git -C <path> status` and appears in `git worktree list` from its source repository.
 5. `openspec --version` succeeds, `openspec/config.yaml` exists, and Codex workflow skills exist under `.agents/skills/openspec-*/SKILL.md`.
 6. The target is the workspace control-repository root, has a baseline commit, and can create a control worktree without involving a child repository.
-7. `knowledge/technology/multi-repo-change-workflow.md`, `AGENTS.md`, and `repositories/index.md` consistently describe the control-first sequence and child branch/worktree mapping.
+7. `repositories/index.md` is the only stable repository inventory; `AGENTS.md` links to it and contains no duplicate repository table. The inventory and `knowledge/technology/multi-repo-change-workflow.md` consistently support the control-first sequence and change-specific child mapping.
 8. Every implemented skill is discoverable as `.agents/skills/<skill-name>/SKILL.md`; `runtime/` is treated as disposable and excluded from version control except for a keep file.
 
 Report what was created, which repositories were materialized, and all unresolved knowledge or repository details.

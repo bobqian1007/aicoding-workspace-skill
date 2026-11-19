@@ -57,7 +57,7 @@ For technical questions, inspect both `knowledge/technology/` and the relevant c
 
 ## Repository inventory
 
-Both `AGENTS.md` and `repositories/index.md` should record:
+`repositories/index.md` is the sole stable source of truth for the repository inventory. It records:
 
 - Service or repository name.
 - Responsibility in the domain.
@@ -66,6 +66,8 @@ Both `AGENTS.md` and `repositories/index.md` should record:
 - Default branch and, when relevant, a pinned base commit.
 - Integration mode: clone, worktree, existing checkout, or inventory only.
 - Current status and unresolved details.
+
+`AGENTS.md` must link agents to `repositories/index.md` and state when to read and update it, but must not repeat the inventory table or individual repository facts. Change-specific branch and worktree mappings belong in the OpenSpec change design or a linked change document, not in either stable file.
 
 Avoid copying repositories into `runtime/`. A git worktree belongs under `repositories/<service-name>/` and remains governed by its source repository's worktree metadata.
 
